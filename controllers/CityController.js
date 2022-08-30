@@ -1,7 +1,7 @@
 const { city,state } = require('../models');
 
 
-exports.citycreate = async (req, res) => {
+exports.create = async (req, res) => {
     try{   
         const citycreate =  await city.create(req.body) 
         return res.status(200).json({
@@ -13,14 +13,14 @@ exports.citycreate = async (req, res) => {
     catch (error) {
         return res.status(400).json({
             success: false,
-            message: "Error creating city.",
+            message: "Error creating the city.",
             citycreate: error
         })
     }
 }
 
 
-exports.cityget = async (req, res) => {
+exports.findAll = async (req, res) => {
  try{
 
     const cityget = await city.findAll({
@@ -29,13 +29,13 @@ exports.cityget = async (req, res) => {
             { model: state, attributes: ['id'] }],
     })
     return res.status(200).json({  
-        message: 'city get successfully',
+        message: "All City fetched successfully.",
         cityget: cityget
     })
  }
  catch (error){
     return res.status(400).json({  
-        message: "Error creating city.",
+        message: "Error fetching departments.",
         citycreate: error
     })
  }
@@ -61,34 +61,37 @@ exports.findById = async (req, res) => {
 }
 exports.update = async (req, res) => {
     try{
-    const city = await city.update(req.body, {where: { id: req.params.id}, returning: true, plain: true })
-       return res.status(200).json({
-            message: 'success update me',
-            cityupdate: result
-        })
+    const city_update = await city.update(req.body, {where: { id: req.params.id}, returning: true, plain: true })
+    return res.status(200).json({
+        success: true,
+        message: "City updated successfully.",
+        cityget: city_update
+    })
     }
     catch(error){
         return res.status(400).json({
             success: false,
-            message: "Error creating city.",
+            message: "Error updating the city.",
             citycreate: error
         })
     }
     }
 
-exports.citydelete = async (req, res) => {
-    console.log(req.body)
-    await city.destroy ({where:{id:req.params.id}}).then(result =>{
-            res.status(200).json({
-                message:'success delete me',
-                citydelete: result
-            }).catch(err => {
-                res.status(400).json({
-                    message:'success delete me',
-                    citydelete: err
-                })
-             })
+exports.delete = async (req, res) => {
+try{   
+     const city_delete = await city.destroy({where:{id:req.params.id}})
+     return res.status(200).json({
+        message: "City deleted successfully.",
+        citydelete: city_delete
+      })
+   }
+   catch(error){
+    return res.status(400).json({
+        success: false,
+        message: "Error deleted the city.",
+        citycreate: error
     })
+   }
 
 }
 

@@ -5,14 +5,14 @@ const router = express.Router();
 
 const usercontroller = require('../controllers/CityController');
 
-router.post('/city',usercontroller.citycreate);
+router.post('/city',usercontroller.create);
 
-router.get('/city',usercontroller.cityget);
+router.get('/city',usercontroller.findAll);
 
-router.get('/city/:id',usercontroller.cityone);
+router.get('/city/:id',usercontroller.findById);
 
-router.put('/city/:id',usercontroller.cityupdate);
+router.put('/city/:id',usercontroller.update);
 
-router.delete('/city/:id',usercontroller.citydelete);
+router.delete('/city/:id',usercontroller.delete);
 
 module.exports = router;
