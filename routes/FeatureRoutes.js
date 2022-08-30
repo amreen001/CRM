@@ -6,14 +6,14 @@ const router = express.Router();
 
 const usercontroller = require('../controllers/FeaturesController');
 
-router.post('/feature',usercontroller.featurecreate);
+router.post('/feature',usercontroller.create);
 
-router.get('/feature',usercontroller.featureget);
+router.get('/feature',usercontroller.findAll);
 
-router.get('/feature/:id',usercontroller.featureone);
+router.get('/feature/:id',usercontroller.findById);
 
-router.put('/feature/:id',usercontroller.featureupdate);
+router.put('/feature/:id',usercontroller.update);
 
-router.delete('/feature/:id',usercontroller.featuredelete);
+router.delete('/feature/:id',usercontroller.delete);
 
 module.exports = router;
